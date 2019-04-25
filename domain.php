@@ -44,7 +44,8 @@ class Dom
         if (array_key_exists("u", $val)) {
             $this->csrInputData["unit"] = $val["u"];
         }
-        //var_dump($this->csrInputData);
+        echo "csrInputData: \n";
+        var_dump($this->csrInputData);
     }
 
     public function getDomainData() {
