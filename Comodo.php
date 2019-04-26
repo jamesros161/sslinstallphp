@@ -45,4 +45,18 @@ class Comodo
         return $randomString;
     }
 
+    public function getCurlString($options){
+            echo "args" . http_build_query($this->$args);
+            echo "options" . http_build_query($options);
+    }
+
+    public function call($url, $args, $argcount) {
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_POST, $argcount);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $args);
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+    }
 }
