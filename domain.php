@@ -86,6 +86,8 @@ class Dom
         } else {
             die("\nDCV Validator is False\n");
         }
+
+        $this->sslOrder = $this->com->orderSsl($this->csrData->data->csr);
         
     }
 

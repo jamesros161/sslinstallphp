@@ -43,7 +43,7 @@ class Comodo
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
-        return $randomString;
+        return strtoupper($randomString);
     }
 
     public function getCsrHashes($csr){
@@ -70,6 +70,28 @@ class Comodo
         $csrHashes->sha256  = ltrim($callResult[3], "sha256=");
         return $csrHashes;
     }
+
+    public function orderSsl($csr){
+        
+        $argsArray = array(
+            "loginName"             =>  $this->credentials->loginName,
+            "loginPassword"         =>  $this->credentials->loginPassword,
+            "product"               =>  $this->args->product,
+            "years"                 =>  $this->args->years,
+            "serverSoftware"        =>  $this->args->serverSoftware,
+            "uniqueValue"           =>  $this->args->uniqueValue,
+            "dcvMethod"             =>  $this->args->dcvMethod,
+            "isCustomerValidated"   => $this->args->isCustomerValidated,
+            "test"                  =>  $this->args->test,
+            "csr"                   =>  $csr );
+
+        print_r($argsArray);    
+        $argsQuery = http_build_query($argsArray);
+        $callResult = $this->call([$this->urls->decode, $argsQuery, count($argsArray)]);
+        print_r($callResult);
+        return $csrHashes;
+    }
+
     public function call($argsArray) {
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL, $argsArray[0]);

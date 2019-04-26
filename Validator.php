@@ -37,7 +37,6 @@ class Validator
         } else {
             return false;
         }
-
     }
 
     function curlResultChecks($result) {
