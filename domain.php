@@ -89,6 +89,7 @@ class Dom
             echo "\nDCV File has a Redirect\n";
             $httpsResult = $this->curlDcv($this->dcv->httpsUrl);
             if ($this->curlResultChecks($httpsResult)){
+                echo "\nwith HTTPS redirect\n";
                 return true;
             }
         } else if ($this->curlResultChecks($result)){
