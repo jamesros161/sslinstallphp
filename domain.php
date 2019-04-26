@@ -26,11 +26,11 @@ class Dom
         $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
         $this->domainData                 = $this->whm1->getDomainData($this->csrInputData->domainName);
 
-        $this->com                        = new Comodo;
+        //$this->com                        = new Comodo;
 
-        $this->csrHashes                  = $this->com->getCsrHashes($this->csrData->data->csr);
+        //$this->csrHashes                  = $this->com->getCsrHashes($this->csrData->data->csr);
         
-        print_r($this->csrHashes);
+        //print_r($this->csrHashes);
     }
 
     // loop through each element in the $argv array
