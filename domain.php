@@ -18,6 +18,7 @@ class Dom
         $this->csrInputData->org          = $this->$val["o"];
         $this->csrInputData->unit         = $this->$val["u"];
 
+        print_r($this->csrInputData);
         //$this->getInputVars();   
 
         $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
