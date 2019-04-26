@@ -132,13 +132,13 @@ class Comodo
 
         $result = curl_exec($ch);
         curl_close($ch);
-        $resultArray = explode("\n", $result);
-        $resultObj = new \stdClass();
-        $resultObj->responseCode = $resultArray[0];
-        $x = array_keys($resultArray, "-----BEGIN CERTIFICATE-----");
-        $y = array_keys($resultArray, "-----END CERTIFICATE-----");
-        $caCert = implode(array_slice($resultArray, $x[0], $x[1] - $x[0]));
-        echo $caCert;
-        
+        //$resultArray = explode("\n", $result);
+        //$resultObj = new \stdClass();
+        //$resultObj->responseCode = $resultArray[0];
+        //$x = array_keys($resultArray, "-----BEGIN CERTIFICATE-----");
+        //$y = array_keys($resultArray, "-----END CERTIFICATE-----");
+        //$caCert = implode(array_slice($resultArray, $x[0], $x[1] - $x[0]));
+        //echo $caCert;
+        print_r($result);
     }
 }
