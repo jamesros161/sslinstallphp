@@ -99,8 +99,8 @@ class Comodo
             "loginPassword"         =>  $this->credentials->loginPassword,
             "queryType"             =>  1,
             "responseEncoding"      =>  0,
-            "responseFormat"        =>  0,
-            "responseType"          =>  2,
+            "responseFormat"        =>  1,
+            "responseType"          =>  3,
             "orderNumber"           =>  $SslOrder );
 
         //print_r($argsArray);    
