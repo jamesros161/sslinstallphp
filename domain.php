@@ -23,6 +23,7 @@ class Dom
         $this->testing->path              = '/root/gitprojects/sslinstallphp/test';
 
         $this->getInputVars();
+        print_r($this->csrInputData);
         //file_put_contents($this->testing->path . "/testCsrInputData.json", json_encode($this->csrInputData));
         
         $this->com                        = new Comodo;
