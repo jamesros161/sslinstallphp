@@ -87,6 +87,13 @@ class Dom
             die("\nDCV File Permission Denied\n");
         } elseif(strpos($result, '200') !== false){
             echo"\nDCV File Exists w/o Redirect\n";
+            if(strpos($result, $this->dcvContent) !== false) {
+                echo "\n and DCV File Contents Match CSR Hashes\n";
+            } else {
+                die("\n but DCV File Contentes do not match CSR Hashes\n");
+            }
+        } else {
+            die("\nDCV File Verification Failed\n");
         }
 
         //return explode("\n", $result);
