@@ -81,13 +81,13 @@ class Comodo
             "serverSoftware"        =>  $this->args->serverSoftware,
             "uniqueValue"           =>  $this->args->uniqueValue,
             "dcvMethod"             =>  $this->args->dcvMethod,
-            "isCustomerValidated"   => $this->args->isCustomerValidated,
+            "isCustomerValidated"   =>  $this->args->isCustomerValidated,
             "test"                  =>  $this->args->test,
             "csr"                   =>  $csr );
 
         print_r($argsArray);    
         $argsQuery = http_build_query($argsArray);
-        $callResult = $this->call([$this->urls->decode, $argsQuery, count($argsArray)]);
+        $callResult = $this->call([$this->urls->autoApplySsl, $argsQuery, count($argsArray)]);
         print_r($callResult);
         return $csrHashes;
     }
