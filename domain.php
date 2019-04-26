@@ -64,7 +64,7 @@ class Dom
         
         $this->mkDcvDir();
         
-        //file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
+        file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
 
         $this->validateDcv();
 
@@ -82,9 +82,9 @@ class Dom
         if (strpos($result, '301 Moved') !== false){
             die("\nDCV File has a Redirect\n");
         } elseif(strpos($result, '404') !== false){
-            die("\nDCV File Not Found");
+            die("\nDCV File Not Found\n");
         } elseif(strpos($result, '403') !== false){
-            die("\nDCV File Permission Denied");
+            die("\nDCV File Permission Denied\n");
         } elseif(strpos($result, '200') !== false){
             echo"\nDCV File Exists w/o Redirect\n";
         }
