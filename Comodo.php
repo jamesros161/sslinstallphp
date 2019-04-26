@@ -85,6 +85,23 @@ class Comodo
             "test"                  =>  $this->args->test,
             "csr"                   =>  $csr );
 
+        //print_r($argsArray);    
+        $argsQuery = http_build_query($argsArray);
+        $callResult = $this->call([$this->urls->autoApplySsl, $argsQuery, count($argsArray)]);
+        //print_r($callResult[1]);
+        return $callResult[1];
+    }
+
+    public function collectSsl($SslOrder){
+        $argsArray = array(
+            "loginName"             =>  $this->credentials->loginName,
+            "loginPassword"         =>  $this->credentials->loginPassword,
+            "queryType"             =>  1,
+            "responseEncoding"      =>  0,
+            "responseFormat"        =>  0,
+            "responseType"          =>  3,
+            "orderNumber"           =>  $SslOrder );
+
         print_r($argsArray);    
         $argsQuery = http_build_query($argsArray);
         $callResult = $this->call([$this->urls->autoApplySsl, $argsQuery, count($argsArray)]);
