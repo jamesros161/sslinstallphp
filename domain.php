@@ -64,7 +64,7 @@ class Dom
         
         $this->mkDcvDir();
         
-        file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
+        //file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
 
         $this->validateDcv();
 
