@@ -31,8 +31,7 @@ class Dom
             $this->csrInputData           = json_decode(file_get_contents($this->testing->path . "/testCsrInputData.json"));
             $this->domainData             = json_decode(file_get_contents($this->testing->path . "/testDomainData.json"));
             $this->csrData                = json_decode(file_get_contents($this->testing->path . "/testCsrData.json"));
-            //$this->csrHashes              = json_decode(file_get_contents($this->testing->path . "/testCsrHashes.json"));
-            $this->csrHashes              = $this->com->getCsrHashes($this->csrData->data->csr);
+            $this->csrHashes              = json_decode(file_get_contents($this->testing->path . "/testCsrHashes.json"));
             
         } else{
 
