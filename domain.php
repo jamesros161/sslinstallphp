@@ -20,7 +20,8 @@ class Dom
         $this->testMode                   = false;
         
         $this->getInputVars();
-        print_r("Test Mode : " . $this->testMode);
+        print_r("Test Mode : ");
+        print_r($this->testMode);
         
         $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
         $this->domainData                 = $this->whm1->getDomainData($this->csrInputData->domainName);
