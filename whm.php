@@ -29,7 +29,7 @@ class WHM
         $shellExecStr = "whmapi1 " . $whmCommand . " " . $whmParams . " --output=json";
         $output = shell_exec($shellExecStr);
         $jsonoutput = json_decode($output);
-        print_r($jsonoutput);
+        //print_r($jsonoutput);
         return $jsonoutput;
     }
 

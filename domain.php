@@ -7,33 +7,48 @@ class Dom
 {
     public function __construct() {
 
-        $this->whm1                       = new WHM;
-    
-        $this->csrInputData               = new \stdClass();
-        $this->csrInputData->domainName   = false;
-        $this->csrInputData->emailAdd     = false;
-        $this->csrInputData->locality     = false;
-        $this->csrInputData->state        = false;
-        $this->csrInputData->country      = false;
-        $this->csrInputData->org          = false;
-        $this->csrInputData->unit         = false;
-        
-        $this->testing                    = new \stdClass();
-        $this->testing->testMode          = false;
-        $this->testing->path              = '/root/gitprojects/sslinstallphp/test';
+        $val                                = getopt("d:e::l::s::c::o::u::t");
 
-        $this->getInputVars();
-        print_r($this->csrInputData);
-        //file_put_contents($this->testing->path . "/testCsrInputData.json", json_encode($this->csrInputData));
+        $this->whm1                         = new WHM;
+    
+        $this->csrInputData                 = new \stdClass();
+        $this->csrInputData->domainName     = false;
+        $this->csrInputData->emailAdd       = false;
+        $this->csrInputData->locality       = false;
+        $this->csrInputData->state          = false;
+        $this->csrInputData->country        = false;
+        $this->csrInputData->org            = false;
+        $this->csrInputData->unit           = false;
+
+        $this->csrInputData->domainName     = $val["d"];
+        $this->csrInputData->emailAdd       = $val["e"];
+        $this->csrInputData->locality       = $val["l"];
+        $this->csrInputData->state          = $val["s"];
+        $this->csrInputData->country        = $val["c"];
+        $this->csrInputData->org            = $val["o"];
+        $this->csrInputData->unit           = $val["u"];
+
+        $this->testing                      = new \stdClass();
+        $this->testing->testMode            = false;
+        $this->testing->path                = '/root/gitprojects/sslinstallphp/test';
+
+        if (array_key_exists("t", $val)) {
+            $this->testing->testMode        = true;
+        } else {
+            $this->testing->testMode        = false;
+        }
         
-        $this->com                        = new Comodo;
+        //$this->getInputVars();
+        //print_r($this->csrInputData);
+        
+        $this->com                          = new Comodo;
 
         if ($this->testing->testMode == true){
 
-            $this->csrInputData           = json_decode(file_get_contents($this->testing->path . "/testCsrInputData.json"));
-            $this->domainData             = json_decode(file_get_contents($this->testing->path . "/testDomainData.json"));
-            $this->csrData                = json_decode(file_get_contents($this->testing->path . "/testCsrData.json"));
-            $this->csrHashes              = json_decode(file_get_contents($this->testing->path . "/testCsrHashes.json"));
+            $this->csrInputData             = json_decode(file_get_contents($this->testing->path . "/testCsrInputData.json"));
+            $this->domainData               = json_decode(file_get_contents($this->testing->path . "/testDomainData.json"));
+            $this->csrData                  = json_decode(file_get_contents($this->testing->path . "/testCsrData.json"));
+            $this->csrHashes                = json_decode(file_get_contents($this->testing->path . "/testCsrHashes.json"));
 
             //print_r($this->csrInputData);
             //print_r($this->domainData);
@@ -43,27 +58,28 @@ class Dom
         } else{
 
             
-            $this->domainData             = $this->whm1->getDomainData($this->csrInputData->domainName);
-            $this->csrData                = $this->whm1->getCsrData($this->csrInputData);
-            print_r($this->$csrData);
-            $this->csrHashes              = $this->com->getCsrHashes($this->csrData->data->csr);
+            $this->domainData               = $this->whm1->getDomainData($this->csrInputData->domainName);
+            $this->csrData                  = $this->whm1->getCsrData($this->csrInputData);
+            $this->csrHashes                = $this->com->getCsrHashes($this->csrData->data->csr);
         }
 
-        $this->dcv = new \stdClass();
-        $this->dcv->subdir = "/.well-known/pki-validation";
-        $this->dcv->dir = $this->domainData->data->userdata->documentroot . $this->dcv->subdir;
-        $this->dcv->fileName = "/" . $this->csrHashes->md5 . ".txt";
-        $this->dcv->filePath = $this->dcv->dir . $this->dcv->fileName;
-        $this->dcv->url = $this->csrInputData->domainName . $this->dcv->subdir . $this->dcv->fileName;
-        $this->dcv->httpUrl = "http://" . $this->dcv->url;
-        $this->dcv->httpsUrl = "https://" . $this->dcv->url;
-        $this->dcv->dcvContent = $this->csrHashes->sha256 . ' comodoca.com\n' . strtoupper($this->com->args->uniqueValue);
+        $this->dcv                          = new \stdClass();
+        $this->dcv->subdir                  = "/.well-known/pki-validation";
+        $this->dcv->dir                     = $this->domainData->data->userdata->documentroot . $this->dcv->subdir;
+        $this->dcv->fileName                = "/" . $this->csrHashes->md5 . ".txt";
+        $this->dcv->filePath                = $this->dcv->dir . $this->dcv->fileName;
+        $this->dcv->url                     = $this->csrInputData->domainName . $this->dcv->subdir . $this->dcv->fileName;
+        $this->dcv->httpUrl                 = "http://" . $this->dcv->url;
+        $this->dcv->httpsUrl                = "https://" . $this->dcv->url;
+        $this->dcv->dcvContent              = $this->csrHashes->sha256 . ' comodoca.com\n' . strtoupper($this->com->args->uniqueValue);
 
         $this->mkDcvDir();
 
         file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
 
-        $this->validator = new Validator($this->dcv->httpUrl, $this->dcv->httpsUrl, $this->dcv->dcvContent);
+        $this->validator                    = new Validator($this->dcv->httpUrl, 
+                                                            $this->dcv->httpsUrl, 
+                                                            $this->dcv->dcvContent);
 
         if($this->validator->isValid) {
             echo "\nDCV Validator is True\n";
@@ -88,17 +104,17 @@ class Dom
     public function getInputVars() {
 
         $val = getopt("d:e::l::s::c::o::u::t");
-        $this->csrInputData->domainName = $val["d"];
-        $this->csrInputData->emailAdd = $val["e"];
-        $this->csrInputData->locality = $val["l"];
-        $this->csrInputData->state = $val["s"];
-        $this->csrInputData->country = $val["c"];
-        $this->csrInputData->org = $val["o"];
-        $this->csrInputData->unit = $val["u"];
+        $this->csrInputData->domainName         = $val["d"];
+        $this->csrInputData->emailAdd           = $val["e"];
+        $this->csrInputData->locality           = $val["l"];
+        $this->csrInputData->state              = $val["s"];
+        $this->csrInputData->country            = $val["c"];
+        $this->csrInputData->org                = $val["o"];
+        $this->csrInputData->unit               = $val["u"];
         if (array_key_exists("t", $val)) {
-            $this->testing->testMode = true;
+            $this->testing->testMode            = true;
         } else {
-            $this->testing->testMode = false;
+            $this->testing->testMode            = false;
         }
 
         //var_dump($val);
