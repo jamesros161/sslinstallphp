@@ -10,7 +10,7 @@ class WHM
     }
 
     public function getDomainData($domainName) {
-        $argument = "domain=" . $domainName;
+        $argument = "domain=" . $domainName . "--output=json";
         $domainuserdata = $this->call("domainuserdata", $argument);
         return $domainuserdata;
     }
