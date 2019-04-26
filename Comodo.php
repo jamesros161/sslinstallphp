@@ -65,6 +65,7 @@ class Comodo
     }
     public function call($argsArray) {
         $ch = curl_init();
+        print_r($argsArray);
         curl_setopt($ch,CURLOPT_URL, $argsArray[0]);
         curl_setopt($ch,CURLOPT_POST, $argsArray[2]);
         curl_setopt($ch,CURLOPT_POSTFIELDS, $argsArray[1]);
