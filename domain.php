@@ -54,7 +54,7 @@ class Dom
         $this->dcv->url = $this->csrInputData->domainName . $this->dcv->subdir . $this->dcv->fileName;
         $this->dcv->httpUrl = "http://" . $this->dcv->url;
         $this->dcv->httpsUrl = "https://" . $this->dcv->url;
-        $this->dcv->dcvContent = $this->csrHashes->sha256 . ' comodoca.com\n' . $this->com->args->uniqueValue;
+        $this->dcv->dcvContent = $this->csrHashes->sha256 . ' comodoca.com\n' . strtoupper($this->com->args->uniqueValue);
 
         $this->selfDCV();
         
@@ -87,7 +87,7 @@ class Dom
             die("\nDCV File Permission Denied\n");
         } elseif(strpos($result, '200') !== false){
             echo"\nDCV File Exists w/o Redirect\n";
-            if(strpos($result, $this->dcvContent) !== false) {
+            if(strpos($result, $this->dcv->dcvContent) !== false) {
                 echo "\n and DCV File Contents Match CSR Hashes\n";
             } else {
                 echo"\n but DCV File Contentes do not match CSR Hashes\n";
