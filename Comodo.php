@@ -24,7 +24,8 @@ class Comodo
         $this->args->product                = "488";
         $this->args->years                  = "1";
         $this->args->serverSoftware         = "22";
-        $this->args->uniqueValue            = $this->randomString();
+        //$this->args->uniqueValue            = $this->randomString();
+        $this->args->uniqueValue            = "LXCFAVIB7CISNWTSJH1E";
         $this->args->dcvMethod              = "HTTP_CSR_HASH";
         $this->args->isCustomerValidated    = "Y";
         $this->args->test                   = "Y";
