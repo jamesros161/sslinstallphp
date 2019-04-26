@@ -1,6 +1,6 @@
 <?php
 require "whm.php";
-//require "Comodo.php";
+require "Comodo.php";
 
 class Dom
 {
