@@ -17,7 +17,10 @@ class Dom
         $this->csrInputData->org          = false;
         $this->csrInputData->unit         = false;
 
-        $this->getInputVars();        
+        $this->testMode                   = false;
+        
+        $this->getInputVars();
+        print_r("Test Mode : " . $this->testMode);
         
         $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
         $this->domainData                 = $this->whm1->getDomainData($this->csrInputData->domainName);
@@ -32,7 +35,7 @@ class Dom
     // loop through each element in the $argv array
     public function getInputVars() {
 
-        $val = getopt("d:e::l::s::c::o::u::tT");
+        $val = getopt("d:e::l::s::c::o::u::t");
        // var_dump($val);
         if (array_key_exists("d", $val)) {
             $this->csrInputData->domainName = $val["d"];
@@ -74,6 +77,12 @@ class Dom
             $this->csrInputData->unit = $val["u"];
         } else {
             $this->csrInputData->unit = "";
+        }
+
+        if (array_key_exists("t", $val)) {
+            $this->testing->testMode = true;
+        } else {
+            $this->csrInputData->unit = false;
         }
 
         //var_dump($this->csrInputData);
