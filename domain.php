@@ -32,24 +32,30 @@ class Dom
             $this->domainData             = json_decode(file_get_contents($this->testing->path . "/testDomainData.json"));
             $this->csrData                = json_decode(file_get_contents($this->testing->path . "/testCsrData.json"));
             $this->csrHashes              = json_decode(file_get_contents($this->testing->path . "/testCsrHashes.json"));
+
+            //print_r($this->csrInputData);
+            //print_r($this->domainData);
+            //print_r($this->csrData);        
+            //print_r($this->csrHashes);
             
         } else{
 
             
             $this->domainData             = $this->whm1->getDomainData($this->csrInputData->domainName);
-            //file_put_contents($this->testing->path . "/testDomainData.json", json_encode($this->domainData));
             $this->csrData                = $this->whm1->getCsrData($this->csrInputData);
-            //file_put_contents($this->testing->path . "/testCsrData.json", json_encode($this->csrData));
             $this->csrHashes              = $this->com->getCsrHashes($this->csrData->data->csr);
-            //file_put_contents($this->testing->path . "/testCsrHashes.json", json_encode($this->csrHashes));
         }
 
-        print_r($this->csrInputData);
-        print_r($this->domainData);
-        print_r($this->csrData);        
-        print_r($this->csrHashes);
+        $this->dcv = new \stdClass();
+        $this->dcv->subdir = "/.well-known/pki-validation";
+        $this->dcv->dir = $this->domainData->data->userdata->documentroot . $this->dcv->subdir;
+        $this->dcv->fileName = "/" . $this->csrHashes->md5 . ".txt";
+        $this->dcv->filePath = $this->dcv->dir . $this->dcv->fileName;
+        $this->dcv->url = $this->csrInputData->domainName . $this->dcv->subdir . $this->dcv->fileName;
+        $this->dcv->httpUrl = "http://" . $this->dcv->url;
+        $this->dcv->httpsUrl = "https://" . $this->dcv->url;
+        $this->dcv->dcvContent = $this->csrHashes->sha256 . ' comodoca.com\n' . $this->com->args->uniqueValue;
         
-        //print_r($this->csrHashes);
     }
 
     // loop through each element in the $argv array
