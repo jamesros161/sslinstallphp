@@ -88,7 +88,7 @@ class Comodo
         print_r($argsArray);    
         $argsQuery = http_build_query($argsArray);
         $callResult = $this->call([$this->urls->autoApplySsl, $argsQuery, count($argsArray)]);
-        print_r(json_decode($callResult));
+        print_r($callResult);
         return $callResult;
     }
 
