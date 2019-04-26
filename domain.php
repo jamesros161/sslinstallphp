@@ -87,9 +87,15 @@ class Dom
             die("\nDCV Validator is False\n");
         }
 
-        $this->sslOrder = $this->com->orderSsl($this->csrData->data->csr);
-        file_put_contents('/root/gitprojects/sslinstallphp/test/testSslOrder.json',json_encode($this->sslOrder));
+        if ($this->testing->testMode == true){
+
+            $this->sslOrder                  = json_decode(file_get_contents($this->testing->path . "/testSslOrder.json")); 
+
+        } else {
+            
+            $this->sslOrder = $this->com->orderSsl($this->csrData->data->csr);
         
+        }
     }
 
     function mkDcvDir(){
