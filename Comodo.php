@@ -60,9 +60,9 @@ class Comodo
             "showCSRHashes2"    =>  $this->args->showCSRHashes2,
             "product"           =>  $this->args->product,
             "csr"               =>  $csr );
-            
-        print_r($this->argsArray);
-        print_r(http_build_query($this->argsArray));
+
+        print_r($argsArray);
+        print_r(http_build_query($argsArray));
         //print_r(http_build_query($options));
     }
     public function call($url, $args, $argcount) {
