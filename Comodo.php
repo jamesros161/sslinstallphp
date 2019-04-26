@@ -79,7 +79,7 @@ class Comodo
             "product"               =>  $this->args->product,
             "years"                 =>  $this->args->years,
             "serverSoftware"        =>  $this->args->serverSoftware,
-            "uniqueValue"           =>  $this->args->uniqueValue,
+          //"uniqueValue"           =>  $this->args->uniqueValue,
             "dcvMethod"             =>  $this->args->dcvMethod,
             "isCustomerValidated"   =>  $this->args->isCustomerValidated,
             "test"                  =>  $this->args->test,
