@@ -65,8 +65,8 @@ class Comodo
         $callResult = $this->call([$this->urls->decode, $argsQuery, count($argsArray)]);
         print_r($callResult);
         $csrHashes = new \stdClass();
-        $csrHashes->md5     = ltrim($csrHashes[1], "md5=");
-        $csrHashes->sha256  = ltrim($csrHashes[3], "sha256=");
+        $csrHashes->md5     = ltrim($callResult[1], "md5=");
+        $csrHashes->sha256  = ltrim($callResult[3], "sha256=");
         return $csrHashes;
     }
     public function call($argsArray) {
