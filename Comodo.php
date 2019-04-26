@@ -133,12 +133,12 @@ class Comodo
         $result = curl_exec($ch);
         curl_close($ch);
         $resultArray = explode("-----BEGIN CERTIFICATE-----", $result);
-        //$resultObj = new \stdClass();
-        //$resultObj->responseCode = $resultArray[0];
+        $resultObj = new \stdClass();
+        $resultObj->responseCode = $resultArray[0];
         //$x = array_keys($resultArray, "-----BEGIN CERTIFICATE-----");
         //$y = array_keys($resultArray, "-----END CERTIFICATE-----");
-        //$caCert = implode(array_slice($resultArray, $x[0], $x[1] - $x[0]));
-        //echo $caCert;
-        print_r($resultArray);
+        $resultObj->caCert = "-----BEGIN CERTIFICATE-----\n" . $resultArray[1];
+
+        print_r($resultObj);
     }
 }
