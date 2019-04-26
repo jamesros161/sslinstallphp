@@ -20,8 +20,9 @@ class WHM
                 .   ' keysize='               . 2048
                 .   ' skip_certificate='      . 1;
            
-        $domainuserdata = $this->call("generatessl", $argument);
-        return $domainuserdata;
+        $csrData = $this->call("generatessl", $argument);
+        print_r($csrData);
+        return $csrData;
     }
 
     public function call($whmCommand, $whmParams) {
