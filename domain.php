@@ -22,19 +22,24 @@ class Dom
         $this->testing->path              = '/root/gitprojects/sslinstallphp/test';
 
         $this->getInputVars();
+        
+        $this->com                        = new Comodo;
 
         if ($this->testing->testMode == true){
-            $filename = "/testCsrInputData.json";
-            $this->csrInputData           = json_decode(file_get_contents($this->testing->path . $filename));
-            print_r($this->csrInputData);
+
+            $this->csrHashes              = json_decode(file_get_contents($this->testing->path . "/testCsrHashes.json"));
+            $this->csrData                = json_decode(file_get_contents($this->testing->path . "/testCsrData.json"));
+            $this->csrInputData           = json_decode(file_get_contents($this->testing->path . "/testCsrInputData.json"));
+            
         } else{
+
+            $this->csrHashes              = $this->com->getCsrHashes($this->csrData->data->csr);
             $this->csrData                = $this->whm1->getCsrData($this->csrInputData);
             $this->domainData             = $this->whm1->getDomainData($this->csrInputData->domainName);
-            print_r($this->csrInputData);
         }
-        //$this->com                        = new Comodo;
-
-        //$this->csrHashes                  = $this->com->getCsrHashes($this->csrData->data->csr);
+        print_r($this->csrHashes);
+        print_r($this->csrData);
+        print_r($this->csrInputData);
         
         //print_r($this->csrHashes);
     }
