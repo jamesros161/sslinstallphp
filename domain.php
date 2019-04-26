@@ -1,6 +1,7 @@
 <?php
 require "whm.php";
 require "Comodo.php";
+require "Validator.php";
 
 class Dom
 {
@@ -56,69 +57,18 @@ class Dom
         $this->dcv->httpsUrl = "https://" . $this->dcv->url;
         $this->dcv->dcvContent = $this->csrHashes->sha256 . ' comodoca.com\n' . strtoupper($this->com->args->uniqueValue);
 
-        $this->selfDCV();
-        
-    }
-
-    function selfDCV(){
-        
         $this->mkDcvDir();
-        
-        //file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
 
-        $result = $this->curlDcv($this->dcv->httpUrl);
-        $this->validateDcv($result);
+        file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
 
-    }
+        $this->validator = new Validator($this->dcv->httpUrl, $this->dcv->httpsUrl, $this->dcv->dcvContent);
 
-    function curlDcv($url) {
-        $chdcv = curl_init();
-        curl_setopt($chdcv,CURLOPT_URL, $url);
-        curl_setopt($chdcv,CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($chdcv,CURLOPT_FOLLOWLOCATION, false);
-        curl_setopt($chdcv,CURLOPT_HEADER, true);
-             
-        $result = curl_exec($chdcv);
-        curl_close($chdcv);
-        return $result;
-    }
-
-    function validateDcv($result) {
-              
-        if (strpos($result, '301 Moved') !== false){
-            echo "\nDCV File has a Redirect\n";
-            $httpsResult = $this->curlDcv($this->dcv->httpsUrl);
-            if ($this->curlResultChecks($httpsResult)){
-                echo "\nwith HTTPS redirect\n";
-                return true;
-            }
-        } else if ($this->curlResultChecks($result)){
-            return true;
-        } 
-
-    }
-
-    function curlResultChecks($result) {
-        
-        if(strpos($result, '200') !== false){
-            if(strpos($result, $this->dcv->dcvContent) !== false) {
-                echo "\nDCV Validation Passed\n";
-                return true;
-            } else {
-                die("\nbut DCV File Contentes do not match CSR Hashes\n");
-            }
-        }
-
-        if(strpos($result, '404') !== false){
-            die("\nDCV File Not Found\n");
-        } 
-        
-        if(strpos($result, '403') !== false){
-            die("\nDCV File Permission Denied\n");
-
+        if($this->validator->isValid) {
+            echo "\n DCV Validator is True\n";
         } else {
-            die("\nDCV File Verification Failed\n");
-        } 
+            echo "\n DCV Validator is False\n";
+        }
+        
     }
 
     function mkDcvDir(){
