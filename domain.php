@@ -66,7 +66,7 @@ class Dom
         
         file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
 
-        $this->validateDcv();
+        print_r($this->validateDcv());
 
     }
 
@@ -90,7 +90,7 @@ class Dom
             if(strpos($result, $this->dcvContent) !== false) {
                 echo "\n and DCV File Contents Match CSR Hashes\n";
             } else {
-                die("\n but DCV File Contentes do not match CSR Hashes\n");
+                echo"\n but DCV File Contentes do not match CSR Hashes\n";
             }
         } else {
             die("\nDCV File Verification Failed\n");
