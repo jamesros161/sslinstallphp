@@ -9,6 +9,7 @@ class Dom
         $this->val = getopt("d:e::l::s::c::o::u::tT");
         $this->whm1 = new WHM;
         //$this->com = new Comodo;
+        $this->csrInputData = new \stdClass();
         $this->csrInputData->domainName   = $this->$val["d"];
         $this->csrInputData->emailAdd     = $this->$val["e"];
         $this->csrInputData->locality     = $this->$val["l"];
