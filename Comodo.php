@@ -70,6 +70,8 @@ class Comodo
         curl_setopt($ch,CURLOPT_POSTFIELDS, $argsArray[1]);
 
         $result = curl_exec($ch);
+        echo "\n Curl Response \n";
+        print_r($result);
         curl_close($ch);
         return $result;
     }
