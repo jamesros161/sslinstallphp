@@ -8,13 +8,13 @@ class Dom
         $this->whm1 = new WHM;
         //$this->com = new Comodo;
 
-        $this->csrInputData->domainName   = "";
-        $this->csrInputData->emailAdd     = "";
-        $this->csrInputData->locality     = "";
-        $this->csrInputData->state        = "";
-        $this->csrInputData->country      = "";
-        $this->csrInputData->org          = "";
-        $this->csrInputData->unit         = "";   
+        $this->csrInputData->domainName   = " ";
+        $this->csrInputData->emailAdd     = " ";
+        $this->csrInputData->locality     = " ";
+        $this->csrInputData->state        = " ";
+        $this->csrInputData->country      = " ";
+        $this->csrInputData->org          = " ";
+        $this->csrInputData->unit         = " ";   
 
         $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
         $this->domainData                 = $this->whm1->getDomainData($this->csrInputData->domainName);

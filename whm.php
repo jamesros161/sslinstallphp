@@ -16,13 +16,13 @@ class WHM
     }
 
     public function getCsrData($csrInputData) {
-        $argument = 'domain='                 . curl_escape($csrInputData->domainName)
-                .   ' emailAddress='          . curl_escape($csrInputData->emailAdd)
-                .   ' countryName='           . curl_escape($csrInputData->locality)
-                .   ' stateOrProvinceName='   . curl_escape($csrInputData->state)
-                .   ' localityName='          . curl_escape($csrInputData->country)
-                .   ' organizationName='      . curl_escape($csrInputData->org)
-                .   ' unitName='              . curl_escape($csrInputData->unit)
+        $argument = 'domain='                 . urlencode($csrInputData->domainName)
+                .   ' emailAddress='          . urlencode($csrInputData->emailAdd)
+                .   ' countryName='           . urlencode($csrInputData->locality)
+                .   ' stateOrProvinceName='   . urlencode($csrInputData->state)
+                .   ' localityName='          . urlencode($csrInputData->country)
+                .   ' organizationName='      . urlencode($csrInputData->org)
+                .   ' unitName='              . urlencode($csrInputData->unit)
                 .   ' keysize='               . 2048
                 .   ' skip_certificate='      . 1;
 
