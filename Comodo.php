@@ -60,15 +60,14 @@ class Comodo
             "showCSRHashes2"    =>  $this->args->showCSRHashes2,
             "product"           =>  $this->args->product,
             "csr"               =>  $csr );
-
-        print_r(http_build_query($argsArray));
-        //print_r(http_build_query($options));
+        $argsQuery = http_build_query($argsArray);
+        return [$this->url->decode, $argsQuery, count($argsArray)];
     }
-    public function call($url, $args, $argcount) {
+    public function call($argsArray) {
         $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL, $url);
-        curl_setopt($ch,CURLOPT_POST, $argcount);
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $args);
+        curl_setopt($ch,CURLOPT_URL, $argsArray[0]);
+        curl_setopt($ch,CURLOPT_POST, $argsArray[2]);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $argsArray[1]);
 
         $result = curl_exec($ch);
         curl_close($ch);

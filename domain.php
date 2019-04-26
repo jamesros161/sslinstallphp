@@ -24,7 +24,9 @@ class Dom
 
         $this->com = new Comodo;
 
-        $this->com->getCurlString($this->csrData->data);
+        $curlString = $this->com->getCurlString($this->csrData->data->csr);
+        $curlResponse = $this->com->call($curlString);
+        print_r($curlResponse);
     }
 
     // loop through each element in the $argv array
