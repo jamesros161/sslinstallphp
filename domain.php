@@ -75,7 +75,7 @@ class Dom
     public function getInputVars() {
 
         $val = getopt("d:e::l::s::c::o::u::t");
-       var_dump($val);
+        //var_dump($val);
         if (array_key_exists("d", $val)) {
             $this->csrInputData->domainName = $val["d"];
         } else {
