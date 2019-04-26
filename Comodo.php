@@ -61,7 +61,6 @@ class Comodo
             "product"           =>  $this->args->product,
             "csr"               =>  $csr );
 
-        print_r($argsArray);
         print_r(http_build_query($argsArray));
         //print_r(http_build_query($options));
     }
