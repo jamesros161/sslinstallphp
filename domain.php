@@ -36,8 +36,9 @@ class Dom
 
             
             $this->domainData             = $this->whm1->getDomainData($this->csrInputData->domainName);
+            file_put_contents($this->testing->path . "/testDomainData.json", json_encode($this->domainData));
             $this->csrData                = $this->whm1->getCsrData($this->csrInputData);
-            $this->csrHashes              = $this->com->getCsrHashes($this->csrData->data->csr);
+           //$this->csrHashes              = $this->com->getCsrHashes($this->csrData->data->csr);
         }
 
         print_r($this->csrInputData);
