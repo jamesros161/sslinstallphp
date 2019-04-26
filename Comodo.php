@@ -99,7 +99,7 @@ class Comodo
             "loginPassword"         =>  $this->credentials->loginPassword,
             "queryType"             =>  1,
             "responseEncoding"      =>  0,
-            "responseFormat"        =>  0,
+            "responseFormat"        =>  1,
             "responseType"          =>  3,
             "orderNumber"           =>  $SslOrder );
 
@@ -108,7 +108,7 @@ class Comodo
         $callResult = $this->rawCall([$this->urls->collectSsl, $argsQuery, count($argsArray)]);
         //parse_str($callResult[0], $output);
         //print_r($output);
-        print_r($callResult);
+        echo $callResult;
         return $callResult;
     }
 
