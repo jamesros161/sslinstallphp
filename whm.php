@@ -20,7 +20,7 @@ class WHM
                 .   ' keysize='               . 2048
                 .   ' skip_certificate='      . 1;
         
-        print_r($argument);
+        //print_r($argument);
         $csrData = $this->call("generatessl", $argument);
         return $csrData;
     }
@@ -29,6 +29,7 @@ class WHM
         $shellExecStr = "whmapi1 " . $whmCommand . " " . $whmParams . " --output=json";
         $output = shell_exec($shellExecStr);
         $jsonoutput = json_decode($output);
+        print_r($jsonoutput);
         return $jsonoutput;
     }
 
