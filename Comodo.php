@@ -106,8 +106,9 @@ class Comodo
         //print_r($argsArray);    
         $argsQuery = http_build_query($argsArray);
         $callResult = $this->rawCall([$this->urls->collectSsl, $argsQuery, count($argsArray)]);
-        parse_str($callResult[0], $output);
-        print_r($output);
+        //parse_str($callResult[0], $output);
+        //print_r($output);
+        print_r($callResult);
         return $callResult;
     }
 
