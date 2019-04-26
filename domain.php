@@ -66,7 +66,7 @@ class Dom
         if($this->validator->isValid) {
             echo "\n DCV Validator is True\n";
         } else {
-            echo "\n DCV Validator is False\n";
+            die("\n DCV Validator is False\n");
         }
         
     }

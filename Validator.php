@@ -34,7 +34,9 @@ class Validator
             }
         } else if ($this->curlResultChecks($this->httpResult)){
             return true;
-        } 
+        } else {
+            return false;
+        }
 
     }
 
@@ -45,19 +47,23 @@ class Validator
                 echo "\nDCV Validation Passed\n";
                 return true;
             } else {
-                die("\nbut DCV File Contentes do not match CSR Hashes\n");
+                echo "\nbut DCV File Contentes do not match CSR Hashes\n";
+                return false;
             }
         }
 
         if(strpos($result, '404') !== false){
-            die("\nDCV File Not Found\n");
+            echo "\nDCV File Not Found\n";
+            return false;
         } 
         
         if(strpos($result, '403') !== false){
-            die("\nDCV File Permission Denied\n");
+            echo "\nDCV File Permission Denied\n";
+            return false;
 
         } else {
-            die("\nDCV File Verification Failed\n");
+            echo "\nDCV File Verification Failed\n";
+            return false;
         } 
     }
 
