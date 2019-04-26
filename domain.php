@@ -88,6 +88,7 @@ class Dom
         }
 
         $this->sslOrder = $this->com->orderSsl($this->csrData->data->csr);
+        file_put_contents('/root/gitprojects/sslinstallphp/test/testSslOrder.json',json_encode($this->sslOrder));
         
     }
 
