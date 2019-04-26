@@ -14,7 +14,8 @@ class Dom
         $this->csrInputData->state        = false;
         $this->csrInputData->country      = false;
         $this->csrInputData->org          = false;
-        $this->csrInputData->unit         = false;   
+        $this->csrInputData->unit         = false;
+        $this->getInputVars();   
 
         $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
         $this->domainData                 = $this->whm1->getDomainData($this->csrInputData->domainName);
