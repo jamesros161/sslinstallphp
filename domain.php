@@ -18,18 +18,13 @@ class Dom
         $this->csrInputData->unit         = false;
 
         $this->getInputVars();        
-        print_r($this->csrInputData);  
-
+        
         $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
         $this->domainData                 = $this->whm1->getDomainData($this->csrInputData->domainName);
 
         $this->com = new Comodo;
 
         $this->com->getCurlString($this->csrData->data);
-    }
-
-    public function printComodoObj() {
-        print_r($this->com);
     }
 
     // loop through each element in the $argv array
@@ -79,7 +74,6 @@ class Dom
             $this->csrInputData->unit = "";
         }
 
-        echo "csrInputData: \n";
         //var_dump($this->csrInputData);
     }
 

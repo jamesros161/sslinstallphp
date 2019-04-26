@@ -47,6 +47,7 @@ class Comodo
     }
 
     public function getCurlString($options){
+            var_dump($this->args);
             echo "args" . http_build_query($this->$args);
             echo "options" . http_build_query($options);
     }
