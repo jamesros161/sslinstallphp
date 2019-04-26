@@ -6,20 +6,19 @@ class Dom
 {
     public function __construct() {
 
-        $this->val = getopt("d:e::l::s::c::o::u::tT");
         $this->whm1 = new WHM;
         //$this->com = new Comodo;
         $this->csrInputData = new \stdClass();
-        $this->csrInputData->domainName   = $this->$val["d"];
-        $this->csrInputData->emailAdd     = $this->$val["e"];
-        $this->csrInputData->locality     = $this->$val["l"];
-        $this->csrInputData->state        = $this->$val["s"];
-        $this->csrInputData->country      = $this->$val["c"];
-        $this->csrInputData->org          = $this->$val["o"];
-        $this->csrInputData->unit         = $this->$val["u"];
+        $this->csrInputData->domainName   = false;
+        $this->csrInputData->emailAdd     = false;
+        $this->csrInputData->locality     = false;
+        $this->csrInputData->state        = false;
+        $this->csrInputData->country      = false;
+        $this->csrInputData->org          = false;
+        $this->csrInputData->unit         = false;
 
-        print_r($this->csrInputData);
-        //$this->getInputVars();   
+        $this->getInputVars();        
+        print_r($this->csrInputData);  
 
         $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
         $this->domainData                 = $this->whm1->getDomainData($this->csrInputData->domainName);
