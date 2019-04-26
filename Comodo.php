@@ -132,7 +132,7 @@ class Comodo
 
         $result = curl_exec($ch);
         curl_close($ch);
-        //$resultArray = explode("\n", $result);
+        $resultArray = explode("-----BEGIN CERTIFICATE-----", $result);
         //$resultObj = new \stdClass();
         //$resultObj->responseCode = $resultArray[0];
         //$x = array_keys($resultArray, "-----BEGIN CERTIFICATE-----");
