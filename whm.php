@@ -25,7 +25,8 @@ class WHM
                 .   ' unitName='              . urlencode($csrInputData->unit)
                 .   ' keysize='               . 2048
                 .   ' skip_certificate='      . 1;
-
+           
+        print_r($argument);
         $domainuserdata = $this->call("generatessl", $argument);
         return $domainuserdata;
     }
