@@ -79,7 +79,8 @@ class Dom
              
         $result = curl_exec($chdcv);
         curl_close($chdcv);
-        return explode("\n", $result);
+        //return explode("\n", $result);
+        return $result;
     }
 
     function mkDcvDir(){
