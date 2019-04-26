@@ -22,6 +22,10 @@ class Dom
         $this->com = new Comodo;
     }
 
+    public function printComodoObj() {
+        print_r($this->com);
+    }
+
     // loop through each element in the $argv array
     public function getInputVars() {
 

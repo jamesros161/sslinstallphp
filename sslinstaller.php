@@ -6,4 +6,5 @@
     $domain = new Dom;
     $domain->getInputVars();
     $domain->getDomainData();
+    $domain->printComodoObj();
 ?>
