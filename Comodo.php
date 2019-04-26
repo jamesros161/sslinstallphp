@@ -10,7 +10,7 @@ class Comodo
 
         $this->creds->path = '/opt/dedrads/sslinstall';
         $this->creds->filename = '/comodocreds.json';
-        $this->$strJsonFileContents = file_get_contents($this->creds->path . $this->creds->filename);
+        $strJsonFileContents = file_get_contents($this->creds->path . $this->creds->filename);
         $this->credentials = json_decode($strJsonFileContents);
     }
 }
