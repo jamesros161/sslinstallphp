@@ -71,7 +71,7 @@ class Dom
         $this->dcv->url                     = $this->csrInputData->domainName . $this->dcv->subdir . $this->dcv->fileName;
         $this->dcv->httpUrl                 = "http://" . $this->dcv->url;
         $this->dcv->httpsUrl                = "https://" . $this->dcv->url;
-        $this->dcv->dcvContent              = $this->csrHashes->sha256 . ' comodoca.com\n' . strtoupper($this->com->args->uniqueValue);
+        $this->dcv->dcvContent              = $this->csrHashes->sha256 . " comodoca.com\n" . strtoupper($this->com->args->uniqueValue);
 
         $this->mkDcvDir();
 
