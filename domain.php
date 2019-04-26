@@ -61,6 +61,28 @@ class Dom
     }
 
     function selfDCV(){
+        
+        $this->mkDcvDir();
+        
+        file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
+
+        print_r($this->validateDcv());
+
+    }
+
+    function validateDcv() {
+        $chdcv = curl_init();
+        curl_setopt($chdcv,CURLOPT_URL, $this->dcv->httpUrl);
+        curl_setopt($chdcv,CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($chdcv,CURLOPT_FOLLOWLOCATION, false);
+        curl_setopt($chdcv,CURLOPT_HEADER, true);
+             
+        $result = curl_exec($chdcv);
+        curl_close($chdcv);
+        return explode("\n", $result);
+    }
+
+    function mkDcvDir(){
         if (!is_dir($this->dcv->dir)) {
             if (!mkdir($this->dcv->dir, 0755, true)) {
                 die('\nFailed to create folders...\n');
