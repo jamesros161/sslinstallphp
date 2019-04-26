@@ -99,13 +99,13 @@ class Comodo
             "loginPassword"         =>  $this->credentials->loginPassword,
             "queryType"             =>  1,
             "responseEncoding"      =>  0,
-            "responseFormat"        =>  1,
+            "responseFormat"        =>  0,
             "responseType"          =>  3,
             "orderNumber"           =>  $SslOrder );
 
         //print_r($argsArray);    
         $argsQuery = http_build_query($argsArray);
-        $callResult = $this->call([$this->urls->collectSsl, $argsQuery, count($argsArray)]);
+        $callResult = $this->rawCall([$this->urls->collectSsl, $argsQuery, count($argsArray)]);
         parse_str($callResult[0], $output);
         print_r($output);
         return $callResult;
@@ -121,5 +121,17 @@ class Comodo
         $result = curl_exec($ch);
         curl_close($ch);
         return explode("\n", $result);
+    }
+
+    public function rawCall($argsArray) {
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL, $argsArray[0]);
+        curl_setopt($ch,CURLOPT_POST, true);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $argsArray[1]);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return $result;
     }
 }
