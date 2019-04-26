@@ -47,11 +47,11 @@ class Comodo
     }
 
     public function getCurlString($options){
-            print_r($this->args);
-            print_r(http_build_query(json_decode($this->$args)));
-            //print_r(http_build_query($options));
+        $argsArray =  (array) $this->args;    
+        print_r($this->argsArray);
+        print_r(http_build_query($this->argsArray));
+        //print_r(http_build_query($options));
     }
-
     public function call($url, $args, $argcount) {
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL, $url);
