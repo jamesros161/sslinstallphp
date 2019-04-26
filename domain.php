@@ -94,10 +94,10 @@ class Dom
 
         } else {
 
-            $this->sslOrder = $this->com->orderSsl($this->csrData->data->csr);
-            $this->certificate = $this->com->collectSsl($this->sslOrder);
-        
+            $this->sslOrder = $this->com->orderSsl($this->csrData->data->csr);        
         }
+        $this->certificate = $this->com->collectSsl($this->sslOrder);
+        print_r($this->certificate);
     }
 
     function mkDcvDir(){
