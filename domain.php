@@ -24,7 +24,7 @@ class Dom
         $this->getInputVars();
 
         if ($this->testing->testMode == true){
-            $filename = "/testCsrinputData.json";
+            $filename = "/testCsrInputData.json";
             $this->csrInputData           = json_decode(file_get_contents($this->testing->path . $filename));
             print_r($this->csrInputData);
         } else{
