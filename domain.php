@@ -30,6 +30,7 @@ class Dom
         } else{
             $this->csrData                = $this->whm1->getCsrData($this->csrInputData);
             $this->domainData             = $this->whm1->getDomainData($this->csrInputData->domainName);
+            print_r($this->csrInputData);
         }
         //$this->com                        = new Comodo;
 
