@@ -33,9 +33,10 @@ class Dom
             
         } else{
 
-            $this->csrHashes              = $this->com->getCsrHashes($this->csrData->data->csr);
-            $this->csrData                = $this->whm1->getCsrData($this->csrInputData);
+            
             $this->domainData             = $this->whm1->getDomainData($this->csrInputData->domainName);
+            $this->csrData                = $this->whm1->getCsrData($this->csrInputData);
+            $this->csrHashes              = $this->com->getCsrHashes($this->csrData->data->csr);
         }
         print_r($this->csrHashes);
         print_r($this->csrData);
