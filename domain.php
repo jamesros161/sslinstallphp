@@ -90,9 +90,10 @@ class Dom
         if ($this->testing->testMode == true){
 
             $this->sslOrder                  = json_decode(file_get_contents($this->testing->path . "/testSslOrder.json")); 
+            echo "\nSSL Order Successful. Order No: " . $this->sslOrder;
 
         } else {
-            
+
             $this->sslOrder = $this->com->orderSsl($this->csrData->data->csr);
         
         }
