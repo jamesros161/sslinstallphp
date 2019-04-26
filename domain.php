@@ -66,7 +66,7 @@ class Dom
         
         file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
 
-        print_r($this->validateDcv());
+        $this->validateDcv();
 
     }
 
