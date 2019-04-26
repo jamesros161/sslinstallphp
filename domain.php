@@ -86,7 +86,21 @@ class Dom
     public function getInputVars() {
 
         $val = getopt("d:e::l::s::c::o::u::t");
+        $this->csrInputData->domainName = $val["d"];
+        $this->csrInputData->emailAdd = $val["e"];
+        $this->csrInputData->locality = $val["l"];
+        $this->csrInputData->state = $val["s"];
+        $this->csrInputData->country = $val["c"];
+        $this->csrInputData->org = $val["o"];
+        $this->csrInputData->unit = $val["u"];
+        if (array_key_exists("t", $val)) {
+            $this->testing->testMode = true;
+        } else {
+            $this->testing->testMode = false;
+        }
+
         //var_dump($val);
+        /*
         if (array_key_exists("d", $val)) {
             $this->csrInputData->domainName = $val["d"];
         } else {
@@ -134,7 +148,7 @@ class Dom
         } else {
             $this->testing->testMode = false;
         }
-
+        */
         //var_dump($this->csrInputData);
     }
 
