@@ -67,8 +67,9 @@ class Comodo
         $ch = curl_init();
         print_r($argsArray);
         curl_setopt($ch,CURLOPT_URL, $argsArray[0]);
-        curl_setopt($ch,CURLOPT_POST, $argsArray[2]);
+        curl_setopt($ch,CURLOPT_POST, true);
         curl_setopt($ch,CURLOPT_POSTFIELDS, $argsArray[1]);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
 
         $result = curl_exec($ch);
         echo "\n Curl Response \n";
