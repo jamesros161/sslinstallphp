@@ -132,6 +132,6 @@ class Comodo
 
         $result = curl_exec($ch);
         curl_close($ch);
-        return explode("\r", $result);
+        return explode("\n", $result);
     }
 }
