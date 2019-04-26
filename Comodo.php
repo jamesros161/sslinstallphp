@@ -3,14 +3,16 @@
 class Comodo
 {
     public function __construct(){
-
+        $this->urls                         = new \stdClass();
         $this->urls->decode                 = 'https://secure.comodo.net/products/%21DecodeCSR';
         $this->urls->autoApplySsl           = 'https://secure.comodo.net/products/!AutoApplySSL';
         $this->urls->collectSsl             = 'https://secure.comodo.net/products/download/CollectSSL';
 
+        $this->headers                      = new \stdClass();
         $this->headers->contentType         = 'Content-Type="application/x-www-form-urlencoded"';
         $this->headers->userAgent           = '"User-Agent=Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0"';
 
+        $this->args                         = new \stdClass();
         $this->args->showCSR                = "N";
         $this->args->showErrorCodes         = "N";
         $this->args->showErrorMessages      = "Y";
@@ -27,8 +29,7 @@ class Comodo
         $this->args->isCustomerValidated    = "Y";
         $this->args->test                   = "Y";
 
-        $this->uniqueValue                  = $this->randomString();
-
+        $this->creds = new \stdClass();
         $this->creds->path                  = '/opt/dedrads/sslinstall';
         $this->creds->filename              = '/comodocreds.json';
         $strJsonFileContents                = file_get_contents($this->creds->path . $this->creds->filename);
