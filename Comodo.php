@@ -137,7 +137,7 @@ class Comodo
         $resultObj->responseCode = $resultArray[0];
         //$x = array_keys($resultArray, "-----BEGIN CERTIFICATE-----");
         //$y = array_keys($resultArray, "-----END CERTIFICATE-----");
-        $resultObj->caCert = "-----BEGIN CERTIFICATE-----\n" . $resultArray[1];
+        $resultObj->caCert = "-----BEGIN CERTIFICATE-----" . $resultArray[1];
 
         print_r($resultObj);
     }
