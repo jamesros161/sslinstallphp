@@ -45,6 +45,7 @@ class Dom
             
             $this->domainData             = $this->whm1->getDomainData($this->csrInputData->domainName);
             $this->csrData                = $this->whm1->getCsrData($this->csrInputData);
+            print_r($this->$csrData);
             $this->csrHashes              = $this->com->getCsrHashes($this->csrData->data->csr);
         }
 

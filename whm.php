@@ -10,7 +10,7 @@ class WHM
     }
 
     public function getCsrData($csrInputData) {
-        $argument = 'domains='                 . urlencode($csrInputData->domainName)
+        $argument = 'domains='                . urlencode($csrInputData->domainName)
                 .   ' emailAddress='          . urlencode($csrInputData->emailAdd)
                 .   ' countryName='           . urlencode($csrInputData->country)
                 .   ' stateOrProvinceName='   . urlencode($csrInputData->state)
@@ -21,7 +21,6 @@ class WHM
                 .   ' skip_certificate='      . 1;
            
         $csrData = $this->call("generatessl", $argument);
-        print_r($csrData);
         return $csrData;
     }
 
