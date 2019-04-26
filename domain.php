@@ -64,9 +64,9 @@ class Dom
         $this->validator = new Validator($this->dcv->httpUrl, $this->dcv->httpsUrl, $this->dcv->dcvContent);
 
         if($this->validator->isValid) {
-            echo "\n DCV Validator is True\n";
+            echo "\nDCV Validator is True\n";
         } else {
-            die("\n DCV Validator is False\n");
+            die("\nDCV Validator is False\n");
         }
         
     }
