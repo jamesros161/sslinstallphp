@@ -12,9 +12,9 @@ class WHM
     public function getCsrData($csrInputData) {
         $argument = 'domains='                 . urlencode($csrInputData->domainName)
                 .   ' emailAddress='          . urlencode($csrInputData->emailAdd)
-                .   ' countryName='           . urlencode($csrInputData->locality)
+                .   ' countryName='           . urlencode($csrInputData->country)
                 .   ' stateOrProvinceName='   . urlencode($csrInputData->state)
-                .   ' localityName='          . urlencode($csrInputData->country)
+                .   ' localityName='          . urlencode($csrInputData->locality)
                 .   ' organizationName='      . urlencode($csrInputData->org)
                 .   ' unitName='              . urlencode($csrInputData->unit)
                 .   ' keysize='               . 2048
