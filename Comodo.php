@@ -63,6 +63,7 @@ class Comodo
             "csr"               =>  $csr );
         $argsQuery = http_build_query($argsArray);
         $callResult = $this->call([$this->urls->decode, $argsQuery, count($argsArray)]);
+        print_r($callResult);
         $csrHashes = new \stdClass();
         $csrHashes->md5     = ltrim($csrHashes[1], "md5=");
         $csrHashes->sha256  = ltrim($csrHashes[3], "sha256=");
