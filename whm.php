@@ -9,6 +9,12 @@ class WHM
         echo "sslCert : " . $sslCert . "\n";
     }
 
+    public function getDomainData($domainName) {
+        $argument = "--domain=" . $domainName;
+        $domainuserdata = $this->call("domainuserdata", $argument);
+        return $domainuserdata;
+    }
+
     public function call($whmCommand, $whmParams) {
         $shellExecStr = "whmapi1 " . $whmCommand . " " . $whmParams;
         $output = shell_exec($shellExecStr);

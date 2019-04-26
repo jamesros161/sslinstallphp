@@ -50,7 +50,7 @@ class Dom
 
     public function getDomainData() {
         echo $this->csrInputData["domainName"];
-        $domainData = $this->whm1->call("domainuserdata", $this->csrInputData["domainName"]);
+        $domainData = $this->whm1->getDomainData($this->csrInputData["domainName"]);
         var_dump($domainData);
     }
 }
