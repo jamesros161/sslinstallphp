@@ -1,25 +1,23 @@
 <?php
 require "whm.php";
-require "Comodo.php";
-class CsrInputData 
-{
-    public function __construct() {
-        $this->domainName   = "";
-        $this->emailAdd     = "";
-        $this->locality     = "";
-        $this->state        = "";
-        $this->country      = "";
-        $this->org          = "";
-        $this->unit         = "";
-    }
-}
+//require "Comodo.php";
 
 class Dom
 {
     public function __construct() {
         $this->whm1 = new WHM;
-        $this->csrInputData = new CsrInputData;
-        $this->com = new Comodo;
+        //$this->com = new Comodo;
+
+        $this->csrInputData->domainName   = "";
+        $this->csrInputData->emailAdd     = "";
+        $this->csrInputData->locality     = "";
+        $this->csrInputData->state        = "";
+        $this->csrInputData->country      = "";
+        $this->csrInputData->org          = "";
+        $this->csrInputData->unit         = "";   
+
+        $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
+        $this->domainData                 = $this->whm1->getDomainData($this->csrInputData->domainName);
     }
 
     public function printComodoObj() {
@@ -56,10 +54,4 @@ class Dom
         //var_dump($this->csrInputData);
     }
 
-    public function getDomainData() {
-        //echo $this->csrInputData["domainName"];
-        $domainData = $this->whm1->getDomainData($this->csrInputData->domainName);
-        //var_dump($domainData);
-        print_r($domainData);
-    }
 }

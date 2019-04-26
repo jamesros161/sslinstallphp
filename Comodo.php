@@ -44,4 +44,7 @@ class Comodo
         }
         return $randomString;
     }
+
+    public function call($url, $fields, )
+
 }
