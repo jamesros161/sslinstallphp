@@ -80,13 +80,13 @@ class Dom
         $result = curl_exec($chdcv);
         curl_close($chdcv);
         if (strpos($result, '301 Moved') !== false){
-            die("\n DCV File has a Redirect\n");
+            die("\nDCV File has a Redirect\n");
         } elseif(strpos($result, '404') !== false){
-            die("\n DCV File Not Found");
+            die("\nDCV File Not Found");
         } elseif(strpos($result, '403') !== false){
-            die("\n DCV File Permission Denied");
+            die("\nDCV File Permission Denied");
         } elseif(strpos($result, '200') !== false){
-            echo"\n DCV File Exists w/o Redirect\n";
+            echo"\nDCV File Exists w/o Redirect\n";
         }
 
         //return explode("\n", $result);
