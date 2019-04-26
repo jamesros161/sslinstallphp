@@ -1,5 +1,6 @@
 <?php
 require "whm.php";
+require "Comodo.php";
 class CsrInputData 
 {
     public function __construct() {
@@ -18,6 +19,7 @@ class Dom
     public function __construct() {
         $this->whm1 = new WHM;
         $this->csrInputData = new CsrInputData;
+        $this->com = new Comodo;
     }
 
     // loop through each element in the $argv array
