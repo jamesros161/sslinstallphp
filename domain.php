@@ -66,38 +66,56 @@ class Dom
         
         file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
 
-        $this->validateDcv();
+        $result = $this->curlDcv($this->dcv->httpUrl);
 
     }
 
-    function validateDcv() {
+    function curlDcv($url) {
         $chdcv = curl_init();
-        curl_setopt($chdcv,CURLOPT_URL, $this->dcv->httpUrl);
+        curl_setopt($chdcv,CURLOPT_URL, $url);
         curl_setopt($chdcv,CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($chdcv,CURLOPT_FOLLOWLOCATION, false);
         curl_setopt($chdcv,CURLOPT_HEADER, true);
              
         $result = curl_exec($chdcv);
         curl_close($chdcv);
+        return $result;
+    }
+
+    function validateDcv($result) {
+              
         if (strpos($result, '301 Moved') !== false){
-            die("\nDCV File has a Redirect\n");
-        } elseif(strpos($result, '404') !== false){
-            die("\nDCV File Not Found\n");
-        } elseif(strpos($result, '403') !== false){
-            die("\nDCV File Permission Denied\n");
-        } elseif(strpos($result, '200') !== false){
-            echo"\nDCV File Exists w/o Redirect\n";
-            if(strpos($result, $this->dcv->dcvContent) !== false) {
-                echo "\n and DCV File Contents Match CSR Hashes\n";
-            } else {
-                echo"\n but DCV File Contentes do not match CSR Hashes\n";
+            echo "\nDCV File has a Redirect\n";
+            $httpsResult = $this->curlDcv($this->dcv->httpsUrl);
+            if ($this->curlResultChecks($httpsResult)){
+                return true;
             }
-        } else {
-            die("\nDCV File Verification Failed\n");
+        } else if ($this->curlResultChecks($result)){
+            return true;
+        } 
+
+    }
+
+    function curlResultChecks($result) {
+        
+        if(strpos($result, '200') !== false){
+            if(strpos($result, $this->dcv->dcvContent) !== false) {
+                return true;
+            } else {
+                die("\nbut DCV File Contentes do not match CSR Hashes\n");
+            }
         }
 
-        //return explode("\n", $result);
-        return $result;
+        if(strpos($result, '404') !== false){
+            die("\nDCV File Not Found\n");
+        } 
+        
+        if(strpos($result, '403') !== false){
+            die("\nDCV File Permission Denied\n");
+
+        } else {
+            die("\nDCV File Verification Failed\n");
+        } 
     }
 
     function mkDcvDir(){
