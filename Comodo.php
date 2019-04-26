@@ -107,7 +107,7 @@ class Comodo
         $argsQuery = http_build_query($argsArray);
         $callResult = $this->rawCall([$this->urls->collectSsl, $argsQuery, count($argsArray)]);
         //parse_str($callResult, $output);
-        print_r($callResult);
+        //print_r($callResult);
         return $callResult;
     }
 
@@ -132,6 +132,11 @@ class Comodo
 
         $result = curl_exec($ch);
         curl_close($ch);
-        return explode("\n", $result);
+        $resultArray = explode("\n", $result);
+        $resultObj = new \stdClass();
+        $resultObj->responseCode = $resultArray[0];
+        print_r(array_keys($resultArray, "-----BEGIN CERTIFICATE-----"));
+        print_r(array_keys($resultArray, "-----END CERTIFICATE-----"));
+        
     }
 }
