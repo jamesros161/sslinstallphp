@@ -45,12 +45,13 @@ class Dom
             $this->csrInputData["unit"] = $val["u"];
         }
         echo "csrInputData: \n";
-        var_dump($this->csrInputData);
+        //var_dump($this->csrInputData);
     }
 
     public function getDomainData() {
-        echo $this->csrInputData["domainName"];
+        //echo $this->csrInputData["domainName"];
         $domainData = $this->whm1->getDomainData($this->csrInputData["domainName"]);
-        var_dump($domainData);
+        //var_dump($domainData);
+        print_r($domainData);
     }
 }

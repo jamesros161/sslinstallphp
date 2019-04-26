@@ -17,7 +17,6 @@ class WHM
 
     public function call($whmCommand, $whmParams) {
         $shellExecStr = "whmapi1 " . $whmCommand . " " . $whmParams;
-        echo '\n' . $shellExecStr . '\n';
         $output = shell_exec($shellExecStr);
         return $output;
     }
