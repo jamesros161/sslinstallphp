@@ -61,10 +61,14 @@ class Dom
     }
 
     function selfDCV(){
-        if (!mkdir($this->dcv->dir, 0755, true)) {
-            die('\nFailed to create folders...\n');
+        if (!is_dir($this->dcv->dir)) {
+            if (!mkdir($this->dcv->dir, 0755, true)) {
+                die('\nFailed to create folders...\n');
+            }
+            echo "\nDCV Path Created : " . $this->dcv->dir . "\n";
+        } else {
+            echo "\nDCV Path Already Exists : " . $this->dcv->dir . "\n";
         }
-        echo "\nDCV Path Created : " . $this->dcv->dir . "\n";
     }
 
     // loop through each element in the $argv array
