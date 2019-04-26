@@ -59,7 +59,7 @@ class Dom
 
         $this->mkDcvDir();
 
-        file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
+        //file_put_contents($this->dcv->filePath,$this->dcv->dcvContent);
 
         $this->validator = new Validator($this->dcv->httpUrl, $this->dcv->httpsUrl, $this->dcv->dcvContent);
 
