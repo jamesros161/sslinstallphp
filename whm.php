@@ -17,7 +17,7 @@ class WHM
 
     public function getCsrData($csrInputData) {
         print_r($csrInputData);
-        $argument = 'domain='                 . urlencode($csrInputData->domainName)
+        $argument = 'domains='                 . urlencode($csrInputData->domainName)
                 .   ' emailAddress='          . urlencode($csrInputData->emailAdd)
                 .   ' countryName='           . urlencode($csrInputData->locality)
                 .   ' stateOrProvinceName='   . urlencode($csrInputData->state)
