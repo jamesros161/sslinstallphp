@@ -139,6 +139,6 @@ class Comodo
         //$y = array_keys($resultArray, "-----END CERTIFICATE-----");
         //$caCert = implode(array_slice($resultArray, $x[0], $x[1] - $x[0]));
         //echo $caCert;
-        print_r($result);
+        print_r($resultArray);
     }
 }
