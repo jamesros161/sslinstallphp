@@ -46,7 +46,7 @@ class Comodo
         return $randomString;
     }
 
-    public function getCurlString($csr){
+    public function getCsrHashes($csr){
         $argsArray = array(
             "loginName"         =>  $this->credentials->loginName,
             "loginPassword"     =>  $this->credentials->loginPassword,
@@ -61,7 +61,11 @@ class Comodo
             "product"           =>  $this->args->product,
             "csr"               =>  $csr );
         $argsQuery = http_build_query($argsArray);
-        return [$this->urls->decode, $argsQuery, count($argsArray)];
+        $callResult = $this->call([$this->urls->decode, $argsQuery, count($argsArray)]);
+        $csrHashes = new \stdClass();
+        $csrHashes->md5     = ltrim($csrHashes[1], "md5=");
+        $csrHashes->sha256  = ltrim($csrHashes[3], "sha256=");
+        return $csrHashes;
     }
     public function call($argsArray) {
         $ch = curl_init();

@@ -6,9 +6,9 @@ class Dom
 {
     public function __construct() {
 
-        $this->whm1 = new WHM;
+        $this->whm1                       = new WHM;
     
-        $this->csrInputData = new \stdClass();
+        $this->csrInputData               = new \stdClass();
         $this->csrInputData->domainName   = false;
         $this->csrInputData->emailAdd     = false;
         $this->csrInputData->locality     = false;
@@ -22,11 +22,11 @@ class Dom
         $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
         $this->domainData                 = $this->whm1->getDomainData($this->csrInputData->domainName);
 
-        $this->com = new Comodo;
+        $this->com                        = new Comodo;
 
-        $curlString = $this->com->getCurlString($this->csrData->data->csr);
-        $curlResponse = $this->com->call($curlString);
-        print_r($curlResponse);
+        $this->csrHashes                  = $this->com->getCsrHashes($this->csrData->data->csr);
+        
+        print_r($this->csrHashes);
     }
 
     // loop through each element in the $argv array
