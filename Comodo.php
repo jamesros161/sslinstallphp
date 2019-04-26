@@ -61,7 +61,7 @@ class Comodo
             "product"           =>  $this->args->product,
             "csr"               =>  $csr );
         $argsQuery = http_build_query($argsArray);
-        return [$this->url->decode, $argsQuery, count($argsArray)];
+        return [$this->urls->decode, $argsQuery, count($argsArray)];
     }
     public function call($argsArray) {
         $ch = curl_init();
