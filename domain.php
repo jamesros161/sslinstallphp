@@ -16,16 +16,21 @@ class Dom
         $this->csrInputData->country      = false;
         $this->csrInputData->org          = false;
         $this->csrInputData->unit         = false;
-
-        $this->testMode                   = false;
         
+        $this->testing                    = new \stdClass();
+        $this->testing->testMode          = false;
+        $this->testing->path              = '/root/gitprojects/sslinstallphp/test';
+
         $this->getInputVars();
-        print_r("Test Mode : ");
-        var_dump($this->testMode);
-        
-        $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
-        $this->domainData                 = $this->whm1->getDomainData($this->csrInputData->domainName);
 
+        if ($this->testing->testMode == true){
+            $filename = "/testCsrinputData.json";
+            $this->csrInputData           = json_decode(file_get_contents($this->testing->path . $filename));
+            print_r($this->csrInputData);
+        } else{
+            $this->csrData                = $this->whm1->getCsrData($this->csrInputData);
+            $this->domainData             = $this->whm1->getDomainData($this->csrInputData->domainName);
+        }
         //$this->com                        = new Comodo;
 
         //$this->csrHashes                  = $this->com->getCsrHashes($this->csrData->data->csr);
@@ -81,9 +86,9 @@ class Dom
         }
 
         if (array_key_exists("t", $val)) {
-            $this->testMode = true;
+            $this->testing->testMode = true;
         } else {
-            $this->testMode = false;
+            $this->testing->testMode = false;
         }
 
         //var_dump($this->csrInputData);

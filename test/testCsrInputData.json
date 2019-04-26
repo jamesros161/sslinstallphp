@@ -1,1 +1,1 @@
-{"domain_name": "domain.com", "emailAdd": "domain@test.com", "city": "Some City", "state": "Some State", "country": "US", "company": "", "division": ""}
+{"domainName": "domain.com", "emailAdd": "domain@test.com", "locality": "Some City", "state": "Some State", "country": "US", "org": "Company Name", "unit": "Company Division"}
