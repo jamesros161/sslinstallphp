@@ -55,7 +55,16 @@ class Dom
         $this->dcv->httpUrl = "http://" . $this->dcv->url;
         $this->dcv->httpsUrl = "https://" . $this->dcv->url;
         $this->dcv->dcvContent = $this->csrHashes->sha256 . ' comodoca.com\n' . $this->com->args->uniqueValue;
+
+        $this->selfDCV();
         
+    }
+
+    function selfDCV(){
+        if (!mkdir($this->dcv->dir, 0755, true)) {
+            die('\nFailed to create folders...\n');
+        }
+        echo "\nDCV Path Created : " . $this->dcv->dir . "\n";
     }
 
     // loop through each element in the $argv array
