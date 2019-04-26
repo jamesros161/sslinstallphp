@@ -81,9 +81,9 @@ class Dom
         }
 
         if (array_key_exists("t", $val)) {
-            $this->testing->testMode = true;
+            $this->testMode = true;
         } else {
-            $this->csrInputData->unit = false;
+            $this->testMode = false;
         }
 
         //var_dump($this->csrInputData);
