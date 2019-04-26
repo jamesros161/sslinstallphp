@@ -10,15 +10,16 @@ class WHM
     }
 
     public function getDomainData($domainName) {
-        $argument = "domain=" . $domainName . " --output=json";
+        $argument = "domain=" . $domainName;
         $domainuserdata = $this->call("domainuserdata", $argument);
         return $domainuserdata;
     }
 
     public function call($whmCommand, $whmParams) {
-        $shellExecStr = "whmapi1 " . $whmCommand . " " . $whmParams;
+        $shellExecStr = "whmapi1 " . $whmCommand . " " . $whmParams . " --output=json";
         $output = shell_exec($shellExecStr);
-        return $output;
+        $jsonoutput = json_decode($output);
+        return $jsonoutput;
     }
 
 }
