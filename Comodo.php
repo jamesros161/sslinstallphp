@@ -46,8 +46,21 @@ class Comodo
         return $randomString;
     }
 
-    public function getCurlString($options){
-        $argsArray =  (array) $this->args;    
+    public function getCurlString($csr){
+        $argsArray = array(
+            "loginName"         =>  $this->credentials->loginName,
+            "loginPassword"     =>  $this->credentials->loginPassword,
+            "showCSR"           =>  $this->args->showCSR,
+            "showErrorCodes"    =>  $this->args->showErrorCodes,
+            "showErrorMessages" =>  $this->args->showErrorMessages,
+            "showFieldNames"    =>  $this->args->showFieldNames,
+            "showEmptyFields"   =>  $this->args->showEmptyFields,
+            "showCN"            =>  $this->args->showCN,
+            "showAddress"       =>  $this->args->showAddress,
+            "showCSRHashes2"    =>  $this->args->showCSRHashes2,
+            "product"           =>  $this->args->product,
+            "csr"               =>  $csr );
+            
         print_r($this->argsArray);
         print_r(http_build_query($this->argsArray));
         //print_r(http_build_query($options));
