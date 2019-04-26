@@ -100,6 +100,7 @@ class Dom
         
         if(strpos($result, '200') !== false){
             if(strpos($result, $this->dcv->dcvContent) !== false) {
+                echo "\nDCV Validation Passed\n";
                 return true;
             } else {
                 die("\nbut DCV File Contentes do not match CSR Hashes\n");
