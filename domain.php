@@ -27,9 +27,10 @@ class Dom
 
         if ($this->testing->testMode == true){
 
+            $this->csrInputData           = json_decode(file_get_contents($this->testing->path . "/testCsrInputData.json"));
+            $this->domainData             = json_decode(file_get_contents($this->testing->path . "/testDomainData.json"));
             $this->csrHashes              = json_decode(file_get_contents($this->testing->path . "/testCsrHashes.json"));
             $this->csrData                = json_decode(file_get_contents($this->testing->path . "/testCsrData.json"));
-            $this->csrInputData           = json_decode(file_get_contents($this->testing->path . "/testCsrInputData.json"));
             
         } else{
 
@@ -38,9 +39,11 @@ class Dom
             $this->csrData                = $this->whm1->getCsrData($this->csrInputData);
             $this->csrHashes              = $this->com->getCsrHashes($this->csrData->data->csr);
         }
-        print_r($this->csrHashes);
-        print_r($this->csrData);
+
         print_r($this->csrInputData);
+        print_r($this->domainData);
+        print_r($this->csrData);        
+        print_r($this->csrHashes);
         
         //print_r($this->csrHashes);
     }
