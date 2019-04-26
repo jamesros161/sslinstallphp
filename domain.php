@@ -7,7 +7,6 @@ class Dom
     public function __construct() {
         $this->whm1 = new WHM;
         //$this->com = new Comodo;
-
         $this->csrInputData->domainName   = false;
         $this->csrInputData->emailAdd     = false;
         $this->csrInputData->locality     = false;
@@ -15,6 +14,7 @@ class Dom
         $this->csrInputData->country      = false;
         $this->csrInputData->org          = false;
         $this->csrInputData->unit         = false;
+        
         $this->getInputVars();   
 
         $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
