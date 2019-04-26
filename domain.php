@@ -21,7 +21,7 @@ class Dom
         
         $this->getInputVars();
         print_r("Test Mode : ");
-        print_r($this->testMode);
+        var_dump($this->testMode);
         
         $this->csrData                    = $this->whm1->getCsrData($this->csrInputData);
         $this->domainData                 = $this->whm1->getDomainData($this->csrInputData->domainName);
