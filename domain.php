@@ -40,10 +40,13 @@ class Dom
             $this->csrData                = $this->whm1->getCsrData($this->csrInputData);
             $this->csrHashes              = $this->com->getCsrHashes($this->csrData->data->csr);
         }
-
+        echo "\n****csrInputData****\n";
         print_r($this->csrInputData);
+        echo "\n****domainData****\n";
         print_r($this->domainData);
-        print_r($this->csrData);        
+        echo "\n****csrData****\n";
+        print_r($this->csrData);       
+        echo "\n****csrHashes****\n"; 
         print_r($this->csrHashes);
         
         //print_r($this->csrHashes);
