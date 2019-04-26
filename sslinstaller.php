@@ -4,5 +4,6 @@
     require "domain.php";
     
     $domain = new Dom;
+    print_r($domain)
 
 ?>
