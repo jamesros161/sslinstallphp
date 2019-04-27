@@ -105,7 +105,7 @@ class Dom
 
     public function getFingerPrint() {
         $temp = tmpfile();
-        file_put_contents($temp, $this->certificate->cert);
+        fwrite($temp, $this->certificate->cert);
         $shellExecStr = "openssl x509 -noout -fingerprint -sha256 -inform pem -in " . stream_get_meta_data($temp)['uri'];
         $output = shell_exec($shellExecStr);
         fclose($temp);
