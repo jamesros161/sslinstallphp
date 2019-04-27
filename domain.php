@@ -98,7 +98,7 @@ class Dom
             $this->certificate               = $this->com->collectSsl($this->sslOrder);
         }
 
-        $this->whm1->sslInstall($this->csrInputData->domainName, $this->csrData->data->key, $this->certificate);
+        //$this->whm1->sslInstall($this->csrInputData->domainName, $this->csrData->data->key, $this->certificate);
         $this->com->sslChecker($this->csrInputData->domainName);
     }
 
