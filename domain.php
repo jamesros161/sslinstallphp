@@ -38,9 +38,6 @@ class Dom
             $this->testing->testMode        = false;
         }
         
-        //$this->getInputVars();
-        //print_r($this->csrInputData);
-        
         $this->com                          = new Comodo;
 
         if ($this->testing->testMode == true){
@@ -50,11 +47,6 @@ class Dom
             $this->csrData                  = json_decode(file_get_contents($this->testing->path . "/testCsrData.json"));
             $this->csrHashes                = json_decode(file_get_contents($this->testing->path . "/testCsrHashes.json"));
 
-            //print_r($this->csrInputData);
-            //print_r($this->domainData);
-            //print_r($this->csrData);        
-            //print_r($this->csrHashes);
-            
         } else{
 
             
@@ -81,39 +73,41 @@ class Dom
                                                             $this->dcv->httpsUrl, 
                                                             $this->dcv->dcvContent);
 
-        if($this->validator->isValid) {
-            echo "\nDCV Validator is True\n";
-        } else {
-            die("\nDCV Validator is False\n");
-        }
-
         if ($this->testing->testMode == true){
 
-            $this->sslOrder                  = json_decode(file_get_contents($this->testing->path . "/testSslOrder.json")); 
-            $this->certificate               = json_decode(file_get_contents($this->testing->path . "/testCertificate.json"));
+            $this->sslOrder                 = json_decode(file_get_contents($this->testing->path . "/testSslOrder.json")); 
+            $this->certificate              = json_decode(file_get_contents($this->testing->path . "/testCertificate.json"));
 
         } else {
 
-            $this->sslOrder                  = $this->com->orderSsl($this->csrData->data->csr);        
-            $this->certificate               = $this->com->collectSsl($this->sslOrder);
+            $this->sslOrder                 = $this->com->orderSsl($this->csrData->data->csr);        
+            $this->certificate              = $this->com->collectSsl($this->sslOrder);
         }
 
-        $this->whm1->sslInstall($this->csrInputData->domainName, $this->csrData->data->key, $this->certificate);
-        $this->certificate->fingerprint = $this->getFingerPrint();
-        $this->com->sslChecker($this->csrInputData->domainName, $this->certificate->fingerprint);
+        $this->whm1->sslInstall(
+            $this->csrInputData->domainName, 
+            $this->csrData->data->key, 
+            $this->certificate
+        );
+        
+        $this->certificate->fingerprint     = $this->getFingerPrint();
+        
+        $this->com->sslChecker(
+            $this->csrInputData->domainName, 
+            $this->certificate->fingerprint
+        );
     }
 
     public function getFingerPrint() {
-        $temp = tmpfile();
+        $temp           = tmpfile();
         fwrite($temp, $this->certificate->cert);
-        $shellExecStr = "openssl x509 -noout -fingerprint -sha256 -inform pem -in " . stream_get_meta_data($temp)['uri'];
+        $shellExecStr   = "openssl x509 -noout -fingerprint -sha256 -inform pem -in " . stream_get_meta_data($temp)['uri'];
         $output = shell_exec($shellExecStr);
         fclose($temp);
-        //print_r($output);
-        $jsonoutput = json_decode($output);
-        $output = str_replace(":", "", $output);
-        $output = ltrim($output, "SHA256 Fingerprint=");
-        //$this->isValidApiCall($jsonoutput->metadata);
+        $jsonoutput     = json_decode($output);
+        $output         = str_replace(":", "", $output);
+        $output         = ltrim($output, "SHA256 Fingerprint=");
+        
         return $output;
     }
 
