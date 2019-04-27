@@ -139,7 +139,6 @@ class Comodo
         //$y = array_keys($resultArray, "-----END CERTIFICATE-----");
         $resultObj->caCert = "-----BEGIN CERTIFICATE-----" . $resultArray[1];
         $resultObj->cert = "-----BEGIN CERTIFICATE-----" . $resultArray[2];
-
-        print_r($resultObj);
+        return $resultObj;
     }
 }
