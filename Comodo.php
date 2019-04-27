@@ -166,7 +166,6 @@ class Comodo
             $resultObj->responseCode        = $resultArray[0];
             $resultObj->caCert              = "-----BEGIN CERTIFICATE-----" . $resultArray[1];
             $resultObj->cert                = "-----BEGIN CERTIFICATE-----" . $resultArray[2];
-            $resultObj->sha256FP            = $this->getFingerPrint($resultObj->cert);
             
             return $resultObj;
         }
