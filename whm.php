@@ -25,6 +25,16 @@ class WHM
         return $csrData;
     }
 
+    public function sslInstall($domain, $certificate) {
+        $argument = 'domain='                . urlencode($domain)
+                .   ' crt='                  . urlencode($certificate->cert)
+                .   ' cab='                  . urlencode($csrInputData->caCert);
+        print_r($argument);
+        $sslInstall = $this->call("generatessl", $argument);
+        print_r($sslInstall);
+        return $sslInstall;
+    }
+
     public function call($whmCommand, $whmParams) {
         $shellExecStr = "whmapi1 " . $whmCommand . " " . $whmParams . " --output=json";
         $output = shell_exec($shellExecStr);

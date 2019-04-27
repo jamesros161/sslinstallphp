@@ -97,7 +97,7 @@ class Dom
             $this->sslOrder = $this->com->orderSsl($this->csrData->data->csr);        
         }
         $this->certificate = $this->com->collectSsl($this->sslOrder);
-        print_r($this->certificate);
+        $this->whm->installSsl($this->csrInputData->domainName, $this->certificate);
     }
 
     function mkDcvDir(){
