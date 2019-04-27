@@ -106,9 +106,38 @@ class Comodo
         //print_r($argsArray);    
         $argsQuery = http_build_query($argsArray);
         $callResult = $this->rawCall([$this->urls->collectSsl, $argsQuery, count($argsArray)]);
-        //parse_str($callResult, $output);
-        //print_r($callResult);
-        return $callResult;
+
+        $resultArray = explode("\n", $callResult);
+        
+        $x = 0;
+        while (int($resultArray[0]) == 0) {
+            if (x == 10){
+                die("\nFailed to Obtain Comodo SSL Certificate after 10 tries\n");
+            }
+            echo "\nWaiting for Comodo to Process Order...\n";
+            sleep (30);
+            $callResult = $this->rawCall([$this->urls->collectSsl, $argsQuery, count($argsArray)]);
+            $resultArray = explode("\n", $callResult);
+            $x = $x + 1;
+        }
+
+        if (int($resultArray[0]) < 0) {
+            echo "\nFailed to Obtain Comodo SSL Certificate\n";
+            die("\n" . $resultArray[1] . "\n");
+        }
+
+        if (int($resultArray[0]) == 2) {
+            $resultArray = explode("-----BEGIN CERTIFICATE-----", $callResult);
+            $resultObj = new \stdClass();
+            $resultObj->responseCode = $resultArray[0];
+            //$x = array_keys($resultArray, "-----BEGIN CERTIFICATE-----");
+            //$y = array_keys($resultArray, "-----END CERTIFICATE-----");
+            $resultObj->caCert = "-----BEGIN CERTIFICATE-----" . $resultArray[1];
+            $resultObj->cert = "-----BEGIN CERTIFICATE-----" . $resultArray[2];
+            //parse_str($callResult, $output);
+            //print_r($callResult);
+            return $resultObj;
+        }
     }
 
     public function call($argsArray) {
@@ -132,13 +161,6 @@ class Comodo
 
         $result = curl_exec($ch);
         curl_close($ch);
-        $resultArray = explode("-----BEGIN CERTIFICATE-----", $result);
-        $resultObj = new \stdClass();
-        $resultObj->responseCode = $resultArray[0];
-        //$x = array_keys($resultArray, "-----BEGIN CERTIFICATE-----");
-        //$y = array_keys($resultArray, "-----END CERTIFICATE-----");
-        $resultObj->caCert = "-----BEGIN CERTIFICATE-----" . $resultArray[1];
-        $resultObj->cert = "-----BEGIN CERTIFICATE-----" . $resultArray[2];
-        return $resultObj;
+        return $result;
     }
 }
