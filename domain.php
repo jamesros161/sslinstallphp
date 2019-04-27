@@ -97,6 +97,8 @@ class Dom
             $this->sslOrder = $this->com->orderSsl($this->csrData->data->csr);        
         }
         $this->certificate = $this->com->collectSsl($this->sslOrder);
+        file_put_contents('/root/gitprojects/sslinstallphp/test/testCertificate.json', json_encode($this->certificate));
+
         $this->whm1->sslInstall($this->csrInputData->domainName, $this->csrData->data->key, $this->certificate);
     }
 
