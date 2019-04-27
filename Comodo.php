@@ -114,7 +114,7 @@ class Comodo
             if (x == 10){
                 die("\nFailed to Obtain Comodo SSL Certificate after 10 tries\n");
             }
-            echo "\nWaiting for Comodo to Process Order...\n";
+            echo "\nWaiting for Comodo to Process Order # " . $SslOrder . " ...\n";
             sleep (30);
             $callResult = $this->rawCall([$this->urls->collectSsl, $argsQuery, count($argsArray)]);
             $resultArray = explode("\n", $callResult);
