@@ -30,9 +30,9 @@ class WHM
                 .   ' crt='                  . urlencode($certificate->cert)
                 .   ' key='                  . urlencode($key)   
                 .   ' cab='                  . urlencode($certificate->caCert);
-        print_r($argument);
+        //print_r($argument);
         $sslInstall = $this->call("installssl", $argument);
-        print_r($sslInstall);
+        //print_r($sslInstall);
         return $sslInstall;
     }
 
@@ -40,7 +40,7 @@ class WHM
         $shellExecStr = "whmapi1 " . $whmCommand . " " . $whmParams . " --output=json";
         $output = shell_exec($shellExecStr);
         $jsonoutput = json_decode($output);
-        //print_r($jsonoutput);
+        print_r($jsonoutput->metadata->result);
         return $jsonoutput;
     }
 
