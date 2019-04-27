@@ -142,7 +142,7 @@ class Comodo
         }
     }
 
-    public function sslChecker($domain){
+    public function sslChecker($domain, $sha256){
         
         $argsArray = array(
             "url"             =>  $domain);
@@ -152,6 +152,7 @@ class Comodo
         $callResult = $this->call([$this->urls->sslChecker, $argsQuery, count($argsArray)]);
         parse_str($callResult[0], $output);
         print_r($output);
+        if($output['cert_fingerprint_sha256'] == $sha256)
         return $output;
     }
 
