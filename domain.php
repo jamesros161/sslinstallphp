@@ -100,7 +100,6 @@ class Dom
 
         $this->whm1->sslInstall($this->csrInputData->domainName, $this->csrData->data->key, $this->certificate);
         $this->certificate->fingerprint = $this->getFingerPrint();
-        print_r($this->certificate->fingerprint); 
         $this->com->sslChecker($this->csrInputData->domainName, $this->certificate->fingerprint);
     }
 

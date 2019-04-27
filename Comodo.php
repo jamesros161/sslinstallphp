@@ -153,7 +153,8 @@ class Comodo
         $argsQuery = http_build_query($argsArray);
         $callResult = $this->call([$this->urls->sslChecker, $argsQuery, count($argsArray)]);
         parse_str($callResult[0], $output);
-        print_r($output);
+        print_r($sha256);
+        print_r($output['cert_fingerprint_sha256']);
         if($output['cert_fingerprint_sha256'] == $sha256) {
             echo "\nSSL Installation Verified by SSL Checker\n";
         } else {
