@@ -155,7 +155,7 @@ class Comodo
         parse_str($callResult[0], $output);
         print_r($sha256);
         print_r($output['cert_fingerprint_sha256']);
-        if($output['cert_fingerprint_sha256'] == $sha256) {
+        if(trim($output['cert_fingerprint_sha256']) == trim($sha256)) {
             echo "\nSSL Installation Verified by SSL Checker\n";
         } else {
             die("SSL Installation Failure\n\tInstalled Certificate does not Match purchased Certificate\n");
