@@ -40,8 +40,19 @@ class WHM
         $shellExecStr = "whmapi1 " . $whmCommand . " " . $whmParams . " --output=json";
         $output = shell_exec($shellExecStr);
         $jsonoutput = json_decode($output);
-        print_r($jsonoutput->metadata->result);
+        $this->isValidApiCall($jsonoutput->metadata);
         return $jsonoutput;
+    }
+
+    public function isValidAPiCall($resultMetadata) {
+        if ($resultMetadata->result == 0) {
+            echo "\nWHMAPI Call Failed\n";
+            echo "\t" . $resultMetadata->reason . "\n";
+            die("\nWHMAPI Failure\n");
+        }
+        if ($resultMetadata->result == 1) {
+            return true;
+        }
     }
 
 }

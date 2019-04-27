@@ -90,14 +90,13 @@ class Dom
         if ($this->testing->testMode == true){
 
             $this->sslOrder                  = json_decode(file_get_contents($this->testing->path . "/testSslOrder.json")); 
-            echo "\nSSL Order Successful. Order No: " . $this->sslOrder . "\n";
+            $this->certificate               = json_decode(file_get_contents($this->testing->path . "/testCertificate.json"));
 
         } else {
 
-            $this->sslOrder = $this->com->orderSsl($this->csrData->data->csr);        
+            $this->sslOrder                  = $this->com->orderSsl($this->csrData->data->csr);        
+            $this->certificate               = $this->com->collectSsl($this->sslOrder);
         }
-        $this->certificate = $this->com->collectSsl($this->sslOrder);
-        file_put_contents('/root/gitprojects/sslinstallphp/test/testCertificate.json', json_encode($this->certificate));
 
         $this->whm1->sslInstall($this->csrInputData->domainName, $this->csrData->data->key, $this->certificate);
     }
