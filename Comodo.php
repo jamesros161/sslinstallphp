@@ -127,6 +127,7 @@ class Comodo
         }
 
         if (intval($resultArray[0]) == 2) {
+            echo "\nSuccessfully Obtained Comodo SSL Certificate\n";
             $resultArray = explode("-----BEGIN CERTIFICATE-----", $callResult);
             $resultObj = new \stdClass();
             $resultObj->responseCode = $resultArray[0];

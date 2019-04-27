@@ -32,6 +32,7 @@ class WHM
                 .   ' cab='                  . urlencode($certificate->caCert);
         //print_r($argument);
         $sslInstall = $this->call("installssl", $argument);
+        echo "\nSSL Certificate Installed Successfully\n";
         //print_r($sslInstall);
         return $sslInstall;
     }
