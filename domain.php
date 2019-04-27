@@ -99,9 +99,21 @@ class Dom
         }
 
         $this->whm1->sslInstall($this->csrInputData->domainName, $this->csrData->data->key, $this->certificate);
-        $fp = $this->com->getFingerPrint($this->certificate->cert);
-        print_r($fp); 
-        $this->com->sslChecker($this->csrInputData->domainName, $this->csrHashes->sha256);
+        $this->certificate->fingerprint = $this->getFingerPrint();
+        print_r($this->certificate->fingerprint); 
+        $this->com->sslChecker($this->csrInputData->domainName, $this->certificate->fingerprint);
+    }
+
+    public function getFingerPrint() {
+        file_put_contents('/root/gitprojects/sslinstallphp/cert', $this->certificate->cert);
+        $shellExecStr = "openssl x509 -noout -fingerprint -sha256 -inform pem -in /root/gitprojects/sslinstallphp/cert";
+        $output = shell_exec($shellExecStr);
+        //print_r($output);
+        $jsonoutput = json_decode($output);
+        $output = str_replace(":", "", $output);
+        $output = ltrim($output, "SHA256 Fingerprint=");
+        //$this->isValidApiCall($jsonoutput->metadata);
+        return $output;
     }
 
     function mkDcvDir(){
