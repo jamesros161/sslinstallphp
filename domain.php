@@ -99,6 +99,7 @@ class Dom
         }
 
         $this->whm1->sslInstall($this->csrInputData->domainName, $this->csrData->data->key, $this->certificate);
+        $this->whm1->sslChecker($this->csrInputData->domainName);
     }
 
     function mkDcvDir(){

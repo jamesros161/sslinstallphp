@@ -7,6 +7,7 @@ class Comodo
         $this->urls->decode                 = 'https://secure.comodo.net/products/%21DecodeCSR';
         $this->urls->autoApplySsl           = 'https://secure.comodo.net/products/!AutoApplySSL';
         $this->urls->collectSsl             = 'https://secure.comodo.net/products/download/CollectSSL';
+        $this->urls->sslChecker             = 'https://secure.comodo.net/sslchecker';
 
         $this->headers                      = new \stdClass();
         $this->headers->contentType         = 'Content-Type="application/x-www-form-urlencoded"';
@@ -141,6 +142,18 @@ class Comodo
         }
     }
 
+    public function sslChecker($domain){
+        
+        $argsArray = array(
+            "url"             =>  $domain);
+
+        //print_r($argsArray);    
+        $argsQuery = http_build_query($argsArray);
+        $callResult = $this->call([$this->urls->sslChecker, $argsQuery, count($argsArray)]);
+        print_r($callResult);
+        return $callResult;
+    }
+
     public function call($argsArray) {
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL, $argsArray[0]);
@@ -164,4 +177,5 @@ class Comodo
         curl_close($ch);
         return $result;
     }
+    
 }
