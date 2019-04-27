@@ -145,7 +145,7 @@ class Comodo
 
     public function getFingerPrint($cert) {
         file_put_contents('/root/gitprojects/sslinstallphp/cert', $cert);
-        $shellExecStr = "openssl x509 -noout -fingerprint -sha256 pem -in /root/gitprojects/sslinstallphp/cert";
+        $shellExecStr = "openssl x509 -noout -fingerprint -sha256 -inform pem -in /root/gitprojects/sslinstallphp/cert";
         $output = shell_exec($shellExecStr);
         print_r($output);
         $jsonoutput = json_decode($output);
