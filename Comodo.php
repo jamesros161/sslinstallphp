@@ -150,8 +150,9 @@ class Comodo
         //print_r($argsArray);    
         $argsQuery = http_build_query($argsArray);
         $callResult = $this->call([$this->urls->sslChecker, $argsQuery, count($argsArray)]);
-        print_r($callResult);
-        return $callResult;
+        parse_str($callResult, $output);
+        print_r($output);
+        return $output;
     }
 
     public function call($argsArray) {
