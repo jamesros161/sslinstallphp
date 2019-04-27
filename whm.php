@@ -25,9 +25,10 @@ class WHM
         return $csrData;
     }
 
-    public function sslInstall($domain, $certificate) {
-        $argument = 'domain='               . urlencode($domain)
+    public function sslInstall($domain, $key, $certificate) {
+        $argument = 'domain='                . urlencode($domain)
                 .   ' crt='                  . urlencode($certificate->cert)
+                .   ' key='                  . urlencode($key)   
                 .   ' cab='                  . urlencode($csrInputData->caCert);
         print_r($argument);
         $sslInstall = $this->call("installssl", $argument);
