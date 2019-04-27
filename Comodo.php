@@ -149,6 +149,8 @@ class Comodo
         $output = shell_exec($shellExecStr);
         //print_r($output);
         $jsonoutput = json_decode($output);
+        str_replace(":", "", $output);
+        $output = ltrim($output, "SHA256 Fingerprint=");
         //$this->isValidApiCall($jsonoutput->metadata);
         return $output;
     }
