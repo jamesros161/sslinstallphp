@@ -26,6 +26,7 @@ class WHM
     }
 
     public function sslInstall($domain, $key, $certificate) {
+        print_r($certificate);
         $argument = 'domain='                . urlencode($domain)
                 .   ' crt='                  . urlencode($certificate->cert)
                 .   ' key='                  . urlencode($key)   
