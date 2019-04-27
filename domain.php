@@ -99,6 +99,8 @@ class Dom
         }
 
         $this->whm1->sslInstall($this->csrInputData->domainName, $this->csrData->data->key, $this->certificate);
+        print_r($this->com->getFingerPrint($resultObj->cert));
+
         $this->com->sslChecker($this->csrInputData->domainName, $this->csrHashes->sha256);
     }
 
