@@ -110,7 +110,7 @@ class Comodo
         $resultArray = explode("\n", $callResult);
         
         $x = 0;
-        while (int($resultArray[0]) == 0) {
+        while (intval($resultArray[0]) == 0) {
             if (x == 10){
                 die("\nFailed to Obtain Comodo SSL Certificate after 10 tries\n");
             }
@@ -121,12 +121,12 @@ class Comodo
             $x = $x + 1;
         }
 
-        if (int($resultArray[0]) < 0) {
+        if (intval($resultArray[0]) < 0) {
             echo "\nFailed to Obtain Comodo SSL Certificate\n";
             die("\n" . $resultArray[1] . "\n");
         }
 
-        if (int($resultArray[0]) == 2) {
+        if (intval($resultArray[0]) == 2) {
             $resultArray = explode("-----BEGIN CERTIFICATE-----", $callResult);
             $resultObj = new \stdClass();
             $resultObj->responseCode = $resultArray[0];
