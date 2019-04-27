@@ -136,10 +136,21 @@ class Comodo
             //$y = array_keys($resultArray, "-----END CERTIFICATE-----");
             $resultObj->caCert = "-----BEGIN CERTIFICATE-----" . $resultArray[1];
             $resultObj->cert = "-----BEGIN CERTIFICATE-----" . $resultArray[2];
+            $resultObj->sha256FP = $this->getFingerPrint($resultObj->cert);
             //parse_str($callResult, $output);
-            //print_r($callResult);
+            print_r($resultObj);
             return $resultObj;
         }
+    }
+
+    public function getFingerPrint($cert) {
+        file_put_contents('/root/gitprojects/sslinstallphp/cert', $cert);
+        $shellExecStr = "openssl x509 -noout -fingerprint -sha256 -inform pem -in /root/gitprojects/sslinstallphp/cert";
+        $output = shell_exec($shellExecStr);
+        print_r($output);
+        $jsonoutput = json_decode($output);
+        //$this->isValidApiCall($jsonoutput->metadata);
+        return $jsonoutput;
     }
 
     public function sslChecker($domain, $sha256){
