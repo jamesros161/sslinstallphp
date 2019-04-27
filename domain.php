@@ -99,8 +99,8 @@ class Dom
         }
 
         $this->whm1->sslInstall($this->csrInputData->domainName, $this->csrData->data->key, $this->certificate);
-        $fp = explode(":", $this->com->getFingerPrint($this->certificate->cert));
-        print_r($fp); 
+        $fp = $this->com->getFingerPrint($this->certificate->cert);
+        print_r(str_replace(":", "", $fp)); 
         $this->com->sslChecker($this->csrInputData->domainName, $this->csrHashes->sha256);
     }
 
